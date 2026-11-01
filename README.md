@@ -9,12 +9,12 @@ all'indirizzo **https://scopri-ambra.baboo.eu**. Stesso stampo di `BabooEsco/mon
 - `assets/` — logo AMBRA (chiaro/scuro), icona, favicon, sfondo impulso, mockup del telefono
   (`telefono-colonnine.svg`, incorporato anche in `index.html`), logo BABOO del piè di pagina.
 - `media/` — video MP4 e poster, da aggiungere quando arrivano da Higgsfield.
-- `CNAME` — da aggiungere al momento della pubblicazione (`scopri-ambra.baboo.eu`).
+- `CNAME` — dominio personalizzato per GitHub Pages (`scopri-ambra.baboo.eu`).
 
 ## Contenuti
 Nel blocco `<script>` di `index.html`:
 - `HERO` — storyboard del video di apertura "Cos'è AMBRA".
-- `AUD` — per ogni pubblico (Aziende e flotte, Condomini, Hotel): testi, video di apertura
+- `AUD` — per ogni pubblico (Aziende e flotte, Condomini, Hotel, Centri commerciali): testi, video di apertura
   e 5 schede video con storyboard (`shots`).
 - Le funzioni non ancora disponibili hanno il tag `'In arrivo'` (scheda attenuata, etichetta ambra).
 
@@ -38,4 +38,4 @@ scopri-ambra.baboo.eu e il valore `origine:'ambra'`. Se non risponde, il form pr
 3. DNS di baboo.eu: record `CNAME` `scopri-ambra` → `babooesco.github.io`.
 4. Verificare il dominio in Settings → Pages e attivare *Enforce HTTPS*.
 
-Link diretti per pubblico: `#aziende`, `#condomini`, `#hotel`.
+Link diretti per pubblico: `#aziende`, `#condomini`, `#hotel`, `#centri`.

@@ -123,7 +123,7 @@ section.dark{background:var(--d-bg);color:var(--d-ink)}
 .tabs button+button{border-left:1px solid var(--m-line)}
 .tabs button:hover{background:var(--m-light);color:var(--m-ink)}
 .tabs button[aria-selected="true"]{background:var(--m-blue);color:#fff}
-@media (max-width:760px){.tabs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--m-line);width:100%}.tabs button{background:var(--m-surface);padding:0 8px;font-size:12px}.tabs button+button{border-left:0}.tabs button:last-child{grid-column:1/-1}}
+@media (max-width:760px){.tabs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--m-line);width:100%}.tabs button{background:var(--m-surface);padding:0 8px;font-size:12px}.tabs button+button{border-left:0}.tabs button:last-child:nth-child(odd){grid-column:1/-1}}
 .aud-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start;margin-bottom:28px}
 .aud-intro h3{font:300 clamp(24px,2.6vw,32px)/1.25 var(--m-font);color:var(--m-ink)}
 .aud-intro p{color:var(--m-ink-soft)}
@@ -353,6 +353,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
       <button role="tab" data-aud="aziende">Aziende e flotte</button>
       <button role="tab" data-aud="condomini">Condomini</button>
       <button role="tab" data-aud="hotel">Hotel</button>
+      <button role="tab" data-aud="centri">Centri commerciali</button>
     </div>
     <div class="aud-intro">
       <h3 id="a-title"></h3>
@@ -566,7 +567,27 @@ const AUD = {
       {data:'base', title:'Il report della struttura', desc:'Ricariche, energia e utilizzo delle colonnine mese per mese: per capire quanto vale il servizio e se servono altre colonnine.', tags:['Report','Utilizzo'],
         shots:S(['Il riepilogo del mese della struttura.','A fine mese hai i numeri del servizio.'],['L’utilizzo di ogni colonnina, giorno per giorno.','Quanto è usata ogni colonnina, e quando.'],['Il confronto con la stagione precedente.','E capisci se è il momento di aggiungerne una.'])},
       {data:'green', title:'La ricarica sul conto della camera', desc:'In arrivo: il collegamento con il gestionale della struttura, per addebitare la ricarica direttamente sul conto della camera.', tags:['In arrivo','Gestionale'],
-        shots:S(['Il conto della camera con le sue voci.','Oggi la ricarica si aggiunge a mano.'],['La riga “Ricarica auto · 38 kWh” compare da sola.','AMBRA la porterà direttamente sul conto.'],['L’ospite paga tutto in un’unica volta.','E l’ospite paga tutto insieme, al check-out.'])} ]}
+        shots:S(['Il conto della camera con le sue voci.','Oggi la ricarica si aggiunge a mano.'],['La riga “Ricarica auto · 38 kWh” compare da sola.','AMBRA la porterà direttamente sul conto.'],['L’ospite paga tutto in un’unica volta.','E l’ospite paga tutto insieme, al check-out.'])} ]},
+  centri:{ az:'Centro commerciale', cta:'Chiedi un sopralluogo', ok:'Grazie. Ti ricontattiamo per fissare il sopralluogo.',
+    title:'La ricarica che porta clienti.',
+    lead:'Centri commerciali, outlet e supermercati: colonnine sempre in funzione nel parcheggio, ricarica gratuita o agevolata con tessera e un report che mostra quanto lavorano, giorno per giorno.',
+    rail:['Ricarica','Accesso','Disponibilità','Report','Pagamento'],
+    ce:'Sopralluogo', ct:'Vediamolo nel tuo parcheggio', cl:['Un sopralluogo del parcheggio con il facility manager','Verifichiamo le colonnine che hai già','Una proposta per tessere, gestione e assistenza'],
+    hero:{title:'AMBRA per un centro commerciale', benefit:'Per chi guida in elettrico una colonnina libera è un buon motivo per scegliere dove fare la spesa. AMBRA la tiene in funzione e ti dice quanto lavora.', shots:[
+      {t:0,vis:'Sabato pomeriggio: il parcheggio è pieno, tre auto elettriche in carica.',vo:'Il sabato il parcheggio è pieno, e sempre più auto sono elettriche.'},
+      {t:8,vis:'Un’auto sceglie il centro con la colonnina libera.',vo:'Una colonnina libera e funzionante fa scegliere il tuo centro invece di un altro.'},
+      {t:16,vis:'Il report del mese con le ore di punta delle colonnine.',vo:'E con AMBRA sai quanto lavorano le colonnine, ora per ora.'} ]},
+    cards:[
+      {data:'amber', title:'La ricarica mentre fai la spesa', desc:'Il cliente ricarica durante la visita. AMBRA registra ogni sessione: durata della sosta, kWh erogati e colonnina usata.', tags:['Sessioni','kWh'],
+        shots:S(['Un cliente attacca l’auto ed entra nella galleria.','Il cliente parcheggia, attacca l’auto ed entra.'],['Il contatore dei kWh sale mentre fa acquisti.','Mentre fa acquisti, l’auto si ricarica.'],['La scheda della sessione: 1 ora e 40, 18 kWh.','E AMBRA registra quanto è rimasto e quanto ha caricato.'])},
+      {data:'sky', title:'Tessere per fedeltà, negozi e flotte', desc:'Tessere RFID per i clienti del programma fedeltà, per i dipendenti dei negozi e per i mezzi dei tenant: ricarica gratuita o agevolata a chi decidi tu.', tags:['RFID','Fedeltà'],
+        shots:S(['Un cliente fedeltà ritira la tessera di ricarica all’info point.','I clienti del programma fedeltà ricevono la tessera.'],['Un commesso ricarica l’auto prima del turno.','Anche i dipendenti dei negozi possono ricaricare.'],['L’elenco delle tessere, divise per gruppo.','E tu decidi chi ricarica gratis e chi a prezzo agevolato.'])},
+      {data:'reactive', title:'Colonnine sempre disponibili', desc:'Una colonnina guasta il sabato pomeriggio sono clienti persi. L’avviso arriva a BABOO, che interviene, e nel report trovi la disponibilità del mese.', tags:['Avvisi','Assistenza'],
+        shots:S(['Sabato: una colonnina va in errore.','Una colonnina ferma nel giorno di punta è un cliente deluso.'],['L’avviso arriva all’assistenza BABOO.','AMBRA ci avvisa subito.'],['La disponibilità del mese: 99,4%.','E a fine mese vedi quanto sono state disponibili.'])},
+      {data:'base', title:'Il report del parcheggio', desc:'Utilizzo per colonnina e per fascia oraria, picchi del weekend ed energia erogata: per decidere se aggiungere colonnine, e dove.', tags:['Report','Utilizzo'],
+        shots:S(['La mappa del parcheggio con le colonnine.','Ogni colonnina ha i suoi numeri.'],['Le ore di punta: sabato pomeriggio e domenica mattina.','Vedi quando sono più usate.'],['Il confronto tra le colonnine più e meno usate.','E capisci dove conviene aggiungerne.'])},
+      {data:'green', title:'Pagamento con carta, app e QR', desc:'In arrivo: ricarica a pagamento per chiunque, senza tessera, con carta, QR o le app dei principali operatori di ricarica.', tags:['In arrivo','Pagamento'],
+        shots:S(['Un automobilista di passaggio arriva senza tessera.','Non tutti i clienti hanno una tessera.'],['Inquadra il QR sulla colonnina e paga con la carta.','Presto potranno pagare con carta, QR o app.'],['L’incasso del mese nel report del centro.','E l’incasso finirà nel report del centro.'])} ]}
 };
 const AUDS = Object.keys(AUD);
 const DATA = {blue:'#3f5f80', sky:'#8fb0d2', amber:'#d7a24a', green:'#6fbf8f', reactive:'#d9776a', base:'#5b6775'};
