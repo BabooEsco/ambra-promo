@@ -8,8 +8,8 @@ all'indirizzo **https://scopri-ambra.baboo.eu**. Stesso stampo di `BabooEsco/mon
 - `index.html` — tutto il sito (CSS e JS inline, nessuna dipendenza).
 - `assets/` — logo AMBRA (chiaro/scuro), icona, favicon, sfondo impulso, mockup del telefono
   (`telefono-colonnine.svg`, incorporato anche in `index.html`), logo BABOO del piè di pagina.
-- `media/` — video MP4 e poster, da aggiungere quando arrivano da Higgsfield.
-- `CNAME` — dominio personalizzato per GitHub Pages (`scopri-ambra.baboo.eu`).
+- `media/` — 25 video (MP4 1080p, ~21–30 s) con poster `.jpg` e sottotitoli `.vtt`: `cos-e-ambra`, `<pubblico>-apertura` e una scheda per ogni video. Riprese Higgsfield Seedance 2.5, voce Julian (ElevenLabs), grafiche AMBRA; ricetta in claude/ambra-video.md del progetto.
+- `CNAME` — da aggiungere al momento della pubblicazione (`scopri-ambra.baboo.eu`).
 
 ## Contenuti
 Nel blocco `<script>` di `index.html`:
