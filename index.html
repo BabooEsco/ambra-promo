@@ -404,11 +404,11 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
       <p>Scegli il tuo caso: per ognuno ci sono cinque video brevi, dalla tessera al report. Le funzioni segnate “in arrivo” sono in sviluppo.</p>
     </div>
     <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-aud="casa">Casa</button>
       <button role="tab" data-aud="aziende">Aziende e flotte</button>
       <button role="tab" data-aud="condomini">Condomini</button>
       <button role="tab" data-aud="hotel">Hotel</button>
       <button role="tab" data-aud="centri">Centri commerciali</button>
-      <button role="tab" data-aud="casa">Casa</button>
     </div>
     <div class="aud-intro">
       <h3 id="a-title"></h3>
@@ -667,7 +667,7 @@ function bars(color, seed){
 }
 
 /* ===== RENDER DEL PUBBLICO ===== */
-let aud = AUDS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'aziende';
+let aud = AUDS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'casa';
 function render(){
   const a=AUD[aud];
   document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.aud===aud));
