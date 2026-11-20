@@ -468,7 +468,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
           </div>
           <div class="row2">
             <label>Colonnine pubbliche (€/kWh)<input id="k-pp" type="number" step="0.01" min="0.3" max="1.2" value="0.70"></label>
-            <label>Fascia
+            <label>Versione
               <select id="k-tier"><option value="Essenziale">Essenziale</option><option value="Smart">Smart</option><option value="Solare">Solare</option></select></label>
           </div>
           <label class="chk"><input id="k-fv" type="checkbox"><span>Ho o avrò il fotovoltaico</span></label>
@@ -562,7 +562,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
           <select id="f-zona"><option>Piemonte</option><option>Lombardia</option><option>Liguria</option><option>Valle d'Aosta</option><option>Altra regione</option></select>
         </label>
         <div class="form-opts" id="f-casa" hidden>
-          <label>Fascia di interesse
+          <label>Versione di interesse
             <select id="f-fascia"><option value="">Non so, consigliatemi</option><option>Essenziale</option><option>Smart</option><option>Solare</option></select>
           </label>
           <label class="check"><input id="f-noleggio" type="checkbox"><span>Mi interessa il noleggio a rata fissa per 36 mesi</span></label>
@@ -850,8 +850,8 @@ $('lead-form').addEventListener('submit',async e=>{
     pagina_da:sget('a_landing')||'',referrer:sget('a_ref')||'',utm:utm||undefined,hp:v('f-hp')};
   if(aud==='casa'){
     const fascia=v('f-fascia')||'da consigliare', noleggio=$('f-noleggio').checked, cer=$('f-cer').checked, bonus=$('f-bonus').checked;
-    Object.assign(payload,{fascia,noleggio,cer,bonus});
-    const extra=[`Fascia: ${fascia}`, noleggio?'Interessato al noleggio 36 mesi':'', cer?'Interessato alla CER SolarCity':'', bonus?'Interessato al contributo a fondo perso':''].filter(Boolean).join(' · ');
+    Object.assign(payload,{versione:fascia,noleggio,cer,bonus});
+    const extra=[`Versione: ${fascia}`, noleggio?'Interessato al noleggio 36 mesi':'', cer?'Interessato alla CER SolarCity':'', bonus?'Interessato al contributo a fondo perso':''].filter(Boolean).join(' · ');
     payload.messaggio=[extra,payload.messaggio].filter(Boolean).join('\n\n');
   }
   const mailBody=[`Nome: ${payload.nome}`,`${a.az}: ${payload.azienda||'-'}`,`Telefono: ${payload.telefono}`,`Email: ${payload.email}`,`Zona: ${payload.zona}`,'',payload.messaggio||''].join('\n');
