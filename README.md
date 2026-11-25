@@ -10,6 +10,7 @@ all'indirizzo **https://scopri-ambra.baboo.eu**. Stesso stampo di `BabooEsco/mon
   (`telefono-colonnine.svg`, incorporato anche in `index.html`), logo BABOO del piè di pagina.
 - `media/` — 25 video (MP4 1080p, ~21–30 s) con poster `.jpg` e sottotitoli `.vtt`: `cos-e-ambra`, `<pubblico>-apertura` e una scheda per ogni video. Riprese Higgsfield Seedance 2.5, voce Julian (ElevenLabs), grafiche AMBRA; ricetta in claude/ambra-video.md del progetto.
 - `wallbox/index.html` — pagina dedicata alla wallbox per la casa (destinazione delle campagne «Wallbox casa»), con calcolatore del risparmio e **configuratore**; `wallbox/listino.js` è l'unica fonte dei prezzi (IVA inclusa: 10% installazione, 22% noleggio), degli accessori e di cosa comprende l'installazione standard: per cambiare un prezzo si modifica solo quel file. I prezzi scritti nell'HTML (meta, hero, card) sono il fallback e vanno tenuti allineati a mano.
+- Link della proposta commerciale: `wallbox/?v=smart&dove=casa&kw=3&posa=parete&wifi=no&dist=entro10&pag=n24&km=15000&fv=1#configura` apre il configuratore e il calcolo del risparmio già compilati (parametri: `v`, `dove`, `kw`, `posa`, `wifi`, `dist`, `pag`, `km`, `fv`; valori sconosciuti ignorati, maiuscole tollerate, nessun dato personale). Specifica: «Minisito wallbox: configuratore precompilato dal link della proposta» (25/11/2026). Se il configuratore cambia domande o valori, va aggiornata la mappa `PROP` nello script e la tabella della specifica.
 - `CNAME` — dominio GitHub Pages (`scopri-ambra.baboo.eu`).
 
 ## Contenuti
