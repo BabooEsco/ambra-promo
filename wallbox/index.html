@@ -87,6 +87,10 @@ section[tabindex="-1"]:focus{outline:none}
 .cfg-out .fine{margin-top:10px}
 .cfg-stop{grid-column:1/-1;background:var(--m-light);border-radius:12px;padding:20px;font-size:15px;color:var(--m-ink)}
 .cfg-stop a{color:var(--m-action)}
+.cfg-stop ul.chk-list{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:5px;font-size:13px;color:var(--m-ink-soft)}
+.cfg-stop ul.chk-list li{padding-left:18px;position:relative}
+.cfg-stop ul.chk-list li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:2px;background:var(--m-amber)}
+.cfg-prop{max-width:760px;margin:0 auto 18px;background:var(--m-light);border-left:4px solid var(--m-amber);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--m-ink)}
 @media (max-width:900px){.cfg{grid-template-columns:1fr}.cfg-out{position:static}}
 
 /* Testata */
@@ -553,6 +557,7 @@ html{scroll-padding-top:80px}
 <section class="block" id="configura">
   <div class="wrap">
     <div class="head center"><div><p class="eyebrow">Configuratore</p><h2>Componi la tua wallbox</h2></div><p>Sei risposte e vedi il prezzo: tutto IVA inclusa, con scritto cosa è compreso e cosa guardiamo al sopralluogo.</p></div>
+    <p class="cfg-prop" id="cfg-prop" hidden>Questa è la configurazione che le abbiamo proposto: può cambiarla quando vuole.</p>
     <form class="cfg" id="cfg" novalidate>
       <div class="cfg-in">
         <fieldset>
@@ -630,6 +635,7 @@ html{scroll-padding-top:80px}
       </aside>
       <div class="cfg-stop" id="cfg-stop" hidden>
         <b>Posto auto in condominio: facciamo un percorso dedicato.</b> Serve la comunicazione all’amministratore e spesso la linea parte dal contatore del garage, quindi il prezzo si definisce al sopralluogo. <a href="../#condomini">Scopri AMBRA per i condomìni</a> oppure <a href="#contatti" data-condominio>chiedi direttamente il sopralluogo</a>: ci occupiamo noi di tutto.
+        <div id="stop-later" hidden><p style="margin-top:12px"><b>Da valutare al sopralluogo</b></p><ul class="chk-list later" id="stop-later-ul"></ul></div>
       </div>
     </form>
   </div>
@@ -804,6 +810,21 @@ if(L.versioni){
   document.querySelectorAll('[data-acconto]').forEach(el=>el.textContent=eurI(L.noleggio.acconto));
   document.querySelectorAll('[data-acc-prezzo]').forEach(el=>{const a=L.accessori[el.dataset.accPrezzo]; if(a) el.textContent=eurI(a.prezzo)});
 }
+/* Link della proposta commerciale: i parametri precompilano configuratore e risparmio (specifica 25/11/2026).
+   Valori sconosciuti ignorati; maiuscole tollerate; nessun dato personale, i prezzi restano quelli del listino. */
+const PROP=(()=>{ const q=new URLSearchParams(location.search), g=k=>(q.get(k)||'').trim().toLowerCase(), o={};
+  const pick=(k,map)=>{const x=map[g(k)]; if(x!==undefined) o[k]=x;};
+  pick('v',{essenziale:'Essenziale',smart:'Smart',solare:'Solare'});
+  pick('dove',{casa:'casa',condominio:'condominio'});
+  pick('kw',{'3':'3','6':'4.5-6',oltre6:'oltre6',trifase:'trifase',nonso:'nonso'});
+  pick('posa',{parete:'parete',piedistallo:'piedistallo'});
+  pick('wifi',{si:'si',no:'no',nonso:'nonso'});
+  pick('dist',{entro10:'entro',oltre10:'oltre',nonso:'nonso'});
+  pick('pag',{acquisto:'acquisto',n24:'noleggio24',n12:'noleggio12'});
+  const km=g('km').replace(/\./g,''); if(/^\d+$/.test(km)&&+km>=1000&&+km<=100000) o.km=+km;
+  if(g('fv')==='1') o.fv=true;
+  o.cfg=['v','dove','kw','posa','wifi','dist','pag'].some(k=>k in o);
+  return o; })();
 /* Configuratore */
 window.CFG_STATE=null;
 (function(){
@@ -813,7 +834,11 @@ window.CFG_STATE=null;
   const LBL={potenza:{'3':'3 kW','4.5-6':'4,5-6 kW','oltre6':'più di 6 kW','trifase':'trifase','nonso':'non sa'},montaggio:{parete:'a parete',piedistallo:'su piedistallo'},sn:{si:'sì',no:'no',nonso:'non sa'},distanza:{entro:'entro 10 m',oltre:'oltre 10 m',nonso:'non sa'}};
   function run(){
     const dove=val('dove'); $('cfg-stop').hidden=dove!=='condominio'; $('cfg-main').hidden=dove==='condominio'; $('cfg-out').hidden=dove==='condominio';
-    if(dove==='condominio'){window.CFG_STATE={dove};return;}
+    if(dove==='condominio'){ const d=val('distanza'), sl=[];
+      if(d==='oltre') sl.push('Metri di cavo oltre i '+L.standard.metriCavo+': si quotano a metro nel preventivo');
+      if(d==='nonso') sl.push('Distanza dal contatore al posto auto: fino a '+L.standard.metriCavo+' metri è compresa, oltre si quota a metro');
+      $('stop-later-ul').innerHTML=sl.map(t=>`<li>${t}</li>`).join(''); $('stop-later').hidden=!sl.length;
+      window.CFG_STATE={dove,distanza:d,later:sl,testo:'Configurazione dal sito: posto auto in condominio'+(sl.length?' · da valutare: '+sl.join('; '):'')}; return;}
     const pot=val('potenza');
     // con 3 kW serve la Smart: l'Essenziale non modula sotto il contatore
     ess.disabled=pot==='3'; if(ess.disabled&&val('versione')==='Essenziale') f.querySelector('input[name="versione"][value="Smart"]').checked=true;
@@ -852,14 +877,16 @@ window.CFG_STATE=null;
     window.CFG_STATE={dove,potenza:pot,versione:ver,montaggio:mont,wifi,distanza:dist,formula,mesi:mesi||null,totale:mesi?null:V.prezzo+unaTantum,rata,
       testo:`Configurazione dal sito: ${title} · ${tot}${sub?' ('+sub+')':''} · contatore: ${LBL.potenza[pot]} · montaggio: ${LBL.montaggio[mont]} · Wi-Fi nel box: ${LBL.sn[wifi]} · distanza dal quadro: ${LBL.distanza[dist]}`+(later.length?` · da valutare: ${later.join('; ')}`:'')};
   }
-  // versione preselezionata dall'URL (es. ?v=Smart dalla vetrina)
-  const qv=new URLSearchParams(location.search).get('v'); if(qv&&L.versioni[qv]){const r=f.querySelector(`input[name="versione"][value="${qv}"]`); if(r) r.checked=true;}
+  // risposte preselezionate dall'URL: ?v=Smart dalla vetrina, oppure il link della proposta commerciale
+  const NAME={v:'versione',dove:'dove',kw:'potenza',posa:'montaggio',wifi:'wifi',dist:'distanza',pag:'formula'};
+  Object.entries(NAME).forEach(([k,n])=>{ if(!(k in PROP)) return; const r=f.querySelector(`input[name="${n}"][value="${PROP[k]}"]`); if(r) r.checked=true; });
+  if(PROP.cfg) $('cfg-prop').hidden=false;
   f.addEventListener('change',run); run();
   // il pulsante porta la configurazione nel form
   $('o-cta').addEventListener('click',()=>{const c=window.CFG_STATE; if(!c||!c.versione) return;
     $('f-fascia').value=c.versione; $('f-noleggio').checked=!!c.mesi; if(c.mesi) $('f-more').open=true;
     $('f-msg').value=c.testo; });
-  f.querySelector('[data-condominio]').addEventListener('click',()=>{$('f-msg').value='Posto auto in condominio: richiesta dal configuratore della pagina Casa.'; $('f-more').open=true;});
+  f.querySelector('[data-condominio]').addEventListener('click',()=>{const c=window.CFG_STATE||{}; $('f-msg').value='Posto auto in condominio: richiesta dal configuratore della pagina Casa.'+(c.later&&c.later.length?' Da valutare: '+c.later.join('; ')+'.':''); $('f-more').open=true;});
 })();
 /* Calcolatore del risparmio */
 (function(){
@@ -867,6 +894,10 @@ window.CFG_STATE=null;
   const eu=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' €', eu2=n=>n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €', g=id=>document.getElementById(id), num=id=>parseFloat(g(id).value)||0;
   g('k-fuel').addEventListener('change',()=>{const b=g('k-fuel').value==='b'; g('k-cons').value=b?'6.5':'5.2'; g('k-pf').value=b?'1.98':'2.22'; run();});
   ['k-km','k-cons','k-pf','k-pe','k-pp','k-tier','k-fv'].forEach(id=>g(id).addEventListener('input',run));
+  // dal link della proposta: versione (quella effettiva del configuratore), chilometri e fotovoltaico
+  if(PROP.v&&TIERS[PROP.v]) g('k-tier').value=((window.CFG_STATE||{}).versione&&TIERS[window.CFG_STATE.versione])?window.CFG_STATE.versione:PROP.v;
+  if(PROP.km){ const r=g('k-km'), k=Math.round(PROP.km/1000)*1000; if(k<+r.min) r.min=k; if(k>+r.max) r.max=k; r.value=k; }
+  if(PROP.fv) g('k-fv').checked=true;
   function run(){
     const km=num('k-km'); g('k-km-o').textContent=km.toLocaleString('it-IT');
     const kwh=km*EV/100, fv=g('k-fv').checked;
@@ -884,6 +915,12 @@ window.CFG_STATE=null;
   }
   run();
 })();
+/* Link della proposta con #configura o #risparmio: scorre alla sezione dopo averla compilata (anche quando le immagini spostano la pagina) */
+if((PROP.cfg||PROP.km||PROP.fv)&&/^#(configura|risparmio)$/.test(location.hash)){
+  let touched=false; ['wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev,()=>{touched=true},{passive:true,once:true}));
+  const go=()=>{ if(touched) return; const el=document.getElementById(location.hash.slice(1)); if(el) el.scrollIntoView({behavior:'instant',block:'start'}); };
+  requestAnimationFrame(go); addEventListener('load',go,{once:true});
+}
 /* Video */
 const vd=$('vdlg'), ve=$('v-el');
 $('v-play').addEventListener('click',()=>{ve.src='../media/casa-apertura.mp4'; vd.showModal(); ve.play().catch(()=>{});});
@@ -906,10 +943,11 @@ $('lead-form').addEventListener('submit',async e=>{
   if(!v('f-nome')||!v('f-tel')||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('f-email'))){say('err','Inserisci nome, telefono ed email, così sappiamo come ricontattarti.');return;}
   if(!$('f-privacy').checked){say('err','Per inviare la richiesta serve la conferma della privacy policy.');return;}
   let utm=null; try{utm=JSON.parse(sget('a_utm')||'null')}catch(e){}
-  const versione=v('f-fascia')||'da consigliare', noleggio=$('f-noleggio').checked, cer=$('f-cer').checked, bonus=$('f-bonus').checked;
+  const C=PROP.cfg?(window.CFG_STATE||{}):{}, cfgTxt=C.testo&&!v('f-msg').includes(C.testo)?C.testo:'';
+  const versione=v('f-fascia')||C.versione||'da consigliare', noleggio=$('f-noleggio').checked||!!C.mesi, cer=$('f-cer').checked, bonus=$('f-bonus').checked;
   const extra=[`Versione: ${versione}`, noleggio?'Interessato al noleggio (12 o 24 mesi)':'', cer?'Interessato alla CER SolarCity':'', bonus?'Interessato al contributo a fondo perso':''].filter(Boolean).join(' · ');
   const payload={nome:v('f-nome'),telefono:v('f-tel'),email:v('f-email'),azienda:v('f-az')||undefined,zona:v('f-zona'),
-    messaggio:[extra,v('f-msg')].filter(Boolean).join('\n\n'),pubblico:'Casa',oggetto:`AMBRA · ${CTA} · Casa · landing wallbox`,origine:'ambra',
+    messaggio:[extra,v('f-msg'),cfgTxt].filter(Boolean).join('\n\n'),pubblico:'Casa',oggetto:`AMBRA · ${CTA} · Casa · landing wallbox`,origine:'ambra',
     versione,noleggio,cer,bonus,privacy:true,privacy_v:PRIVACY_V,pagina:location.pathname+(location.hash||''),
     /* TODO relè 3.11.2: inviare anche window.CFG_STATE (potenza, montaggio, wifi, distanza, formula) come campi; oggi la configurazione viaggia nel messaggio */
     pagina_da:sget('a_landing')||'',referrer:sget('a_ref')||'',utm:utm||undefined,hp:v('f-hp')};
