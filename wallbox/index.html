@@ -58,7 +58,7 @@ section[tabindex="-1"]:focus{outline:none}
 /* Testata */
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--m-line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:68px}
-.top .logo img{height:40px;width:auto}
+.top .logo{display:flex;align-items:center;gap:12px;text-decoration:none}.top .logo img{height:40px;width:auto}.top .logo-by{font:400 12px/1.3 var(--m-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--m-ink-soft);border-left:1px solid var(--m-line);padding-left:12px}@media (max-width:600px){.top .logo-by{display:none}}
 .top nav{display:flex;gap:4px;align-items:center}
 .top nav a{color:var(--m-ink-soft);text-decoration:none;font-size:14px;padding:10px 12px;border-radius:var(--m-radius-btn)}
 .top nav a:hover{color:var(--m-ink);background:var(--m-light)}
@@ -190,6 +190,7 @@ section.dark{background:var(--d-bg);color:var(--d-ink)}
 .contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;background:var(--m-surface);border:1px solid var(--m-line);border-radius:var(--m-radius-card);padding:40px}
 .contact h2{font:300 clamp(28px,3.2vw,40px)/1.2 var(--m-font);margin-top:12px}
 .contact ul{margin:18px 0 0;padding-left:18px;color:var(--m-ink-soft);display:grid;gap:6px}
+.more{margin:4px 0 8px}.more summary{cursor:pointer;font-size:14px;color:var(--m-sky);list-style:none}.more summary::-webkit-details-marker{display:none}.more summary::before{content:"+ ";font-weight:600}.more[open] summary::before{content:"– "}.more .form-opts{margin-top:10px}
 .contact .access{margin-top:28px;padding-top:20px;border-top:1px solid var(--m-line);font-size:15px;color:var(--m-ink-soft)}
 form{display:grid;gap:12px}
 label{display:grid;gap:4px;font-size:14px;color:var(--m-ink-soft)}
@@ -271,7 +272,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
 .tier li{padding-left:18px;position:relative}
 .tier li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:2px;background:var(--m-amber)}
 .tier .btn{margin-top:auto}
-.tiers-note{font-size:13px;color:var(--m-ink-soft);margin-top:12px}
+.tiers-note{font-size:13px;color:var(--m-ink-soft);margin-top:12px}.tiers-note p+p{margin-top:8px}
 .services{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:8px}
 .svc{background:var(--m-surface);border:1px solid var(--m-line);border-radius:var(--m-radius-card);padding:18px 20px}
 .svc h4{font:500 16px/1.3 var(--m-font);color:var(--m-ink);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -391,7 +392,7 @@ html{scroll-padding-top:80px}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="../"><img src="../assets/ambra-logo-fondo-chiaro.svg" alt="AMBRA · BABOO Energy" width="146" height="40"></a>
+    <a class="logo" href="../"><img src="../assets/ambra-logo-fondo-chiaro.svg" alt="AMBRA · BABOO Energy" width="146" height="40"><span class="logo-by">Un servizio di BABOO ESCo</span></a>
     <nav aria-label="Sezioni">
       <a href="#wallbox">La wallbox</a>
       <a href="#versioni">Versioni e prezzi</a>
@@ -416,9 +417,9 @@ html{scroll-padding-top:80px}
 <section class="lh" aria-label="Wallbox per la casa">
   <img class="lh-bg" src="../media/wallbox-hero.webp" alt="" width="1920" height="1080" fetchpriority="high">
   <div class="lh-in">
-    <p class="eyebrow">Wallbox per la casa · BABOO ESCo</p>
+    <p class="eyebrow">Wallbox per la casa · Piemonte e Lombardia</p>
     <h1>La ricarica di casa,<br>installata e seguita.</h1>
-    <p class="lead">Una wallbox nel tuo box o posto auto, la linea dedicata, le protezioni e l’app AMBRA. Da 1.045 € installata, IVA inclusa, oppure a noleggio da 24,40 € al mese.</p>
+    <p class="lead">Una wallbox nel tuo box o posto auto, installata dai tecnici BABOO e seguita da AMBRA. Da 1.045 € installata, IVA inclusa, oppure a noleggio da 24,40 € al mese. Sopralluogo gratuito in Piemonte e Lombardia.</p>
     <div class="ctas">
       <a class="btn btn-primary" href="#contatti">Chiedi un sopralluogo</a>
       <a class="btn btn-ghost" href="#risparmio">Calcola il risparmio</a>
@@ -429,7 +430,7 @@ html{scroll-padding-top:80px}
 
 <section class="intro" id="intro">
   <div class="wrap narrow">
-    <p>Benvenuto nella <b>ricarica di casa</b> secondo BABOO: una sola wallbox, scelta per durare, installata dai nostri tecnici e collegata ad <b>AMBRA</b>, la piattaforma con cui seguiamo ogni ricarica e interveniamo se qualcosa si ferma.</p>
+    <p>La <b>ricarica di casa</b> secondo BABOO ESCo, la Energy Service Company di Omegna: una sola wallbox, scelta per durare, installata dai nostri tecnici e collegata ad <b>AMBRA</b>, la piattaforma con cui seguiamo ogni ricarica e interveniamo se qualcosa si ferma. Lavoriamo in Piemonte e in Lombardia, dal Lago Maggiore a Novara, Vercelli, Alessandria, Varese e Pavia.</p>
   </div>
 </section>
 
@@ -450,7 +451,7 @@ html{scroll-padding-top:80px}
     <div class="head center"><div><p class="eyebrow">Perché questa wallbox</p><h2>Semplice da usare, fatta per durare</h2></div></div>
     <div class="feats">
       <div class="feat"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><rect x="8" y="6" width="8" height="5" rx="1"/><path d="M9 15c1.5-1.5 4.5-1.5 6 0"/></svg><h3>Display e tessera RFID</h3><p>Vedi lo stato della ricarica e la avvii o la fermi con la tessera.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg><h3>Da 7 a 22 kW</h3><p>7 kW in monofase, 11 o 22 kW in trifase, regolata sulla potenza del tuo contatore.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg><h3>Anche con 3 kW</h3><p>7 kW in monofase, 11 o 22 kW se hai la trifase. Con la Smart resta sotto la potenza del contatore: niente distacchi e nessun aumento di potenza da chiedere.</p></div>
       <div class="feat"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><h3>App AMBRA</h3><p>Ogni ricarica sul telefono: quando, quanti kWh e quanto è costata.</p></div>
       <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><h3>Protezioni complete</h3><p>Linea dedicata, differenziale e magnetotermico, protezione da sovratemperatura e cortocircuito.</p></div>
       <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3c3 4 6 7 6 11a6 6 0 01-12 0c0-4 3-7 6-11z"/></svg><h3>Anche all’aperto</h3><p>Resiste a pioggia e polvere: va bene nel box e nel posto auto esterno.</p></div>
@@ -485,7 +486,7 @@ html{scroll-padding-top:80px}
         <p class="for">Per ricaricare a casa, di notte, al prezzo giusto.</p>
         <p class="price"><small>Wallbox installata</small>da 1.045 € <em>IVA inclusa</em></p>
         <p class="rent">oppure a noleggio: acconto 427 € e <b>da 24,40 €/mese</b>, IVA inclusa, per 36 mesi</p>
-        <ul><li>Display e lettore di tessere RFID</li><li>App AMBRA: ricariche, costi, report del mese e avvisi</li><li>7 kW monofase, 11 o 22 kW trifase, potenza fissata sul tuo contatore</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
+        <ul><li>Display e lettore RFID, due tessere in dotazione</li><li>App AMBRA: ricariche, costi, report del mese e avvisi</li><li>7 kW monofase, 11 o 22 kW trifase, potenza fissata sul tuo contatore</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
         <a class="btn btn-secondary" href="#contatti" data-tier="Essenziale">Chiedi un sopralluogo</a>
       </article>
       <article class="tier hl">
@@ -508,7 +509,7 @@ html{scroll-padding-top:80px}
         <a class="btn btn-secondary" href="#contatti" data-tier="Solare">Chiedi un sopralluogo</a>
       </article>
     </div>
-    <p class="tiers-note">Prezzi IVA inclusa (10% sull’installazione, 22% sul noleggio) per installazioni standard; il noleggio è soggetto ad approvazione e comprende wallbox, installazione, AMBRA, manutenzione e guasti, con la wallbox che resta tua a fine noleggio. La linea oltre i primi metri, le opere murarie e l’eventuale aumento di potenza del contatore si quotano dopo il sopralluogo.</p>
+    <div class="tiers-note"><p><b>Cosa comprende «installata».</b> Sopralluogo, wallbox, linea dedicata fino a 10 metri dal quadro con posa a vista, protezione dedicata nel quadro, montaggio a parete, collegamento al Wi-Fi di casa e attivazione su AMBRA, due tessere RFID, dichiarazione di conformità e garanzia di 2 anni su wallbox e installazione. Se la tua casa chiede qualcosa in più (più cavo, posa sottotraccia, aumento di potenza, piedistallo a 299 €), lo vediamo al sopralluogo e te lo scriviamo nel preventivo prima di iniziare.</p><p>Prezzi IVA inclusa (10% sull’installazione, 22% sul noleggio). Il noleggio è soggetto ad approvazione dell’istituto finanziario e comprende wallbox, installazione, AMBRA, manutenzione e guasti, con la wallbox che resta tua a fine noleggio.</p></div>
   </div>
 </section>
 
@@ -564,7 +565,7 @@ html{scroll-padding-top:80px}
     <ol class="steps">
       <li><span>01</span><h3>Sopralluogo</h3><p>Contatore, quadro, percorso della linea e punto di posa: guardiamo tutto prima di proporre.</p></li>
       <li><span>02</span><h3>Preventivo chiaro</h3><p>Versione consigliata, linea, protezioni e opere: tutto scritto, da comprare o a noleggio.</p></li>
-      <li><span>03</span><h3>Installazione</h3><p>In genere un giorno di lavoro: posa, collaudo, prima ricarica e dichiarazione di conformità.</p></li>
+      <li><span>03</span><h3>Installazione</h3><p>In genere mezza giornata: posa, collaudo, prima ricarica assistita e dichiarazione di conformità.</p></li>
       <li><span>04</span><h3>AMBRA e assistenza</h3><p>La wallbox è già collegata: ricariche nell’app, avvisi e intervento BABOO se si ferma.</p></li>
     </ol>
     <div class="video-row">
@@ -586,7 +587,7 @@ html{scroll-padding-top:80px}
       <div>
         <p class="eyebrow">Sopralluogo</p>
         <h2>Vediamolo a casa tua</h2>
-        <ul><li>Un sopralluogo per contatore, potenza e percorso della linea</li><li>Un preventivo per wallbox e installazione, senza sorprese</li><li>Se hai o vuoi il fotovoltaico, la versione giusta per usarlo</li></ul>
+        <ul><li>Un sopralluogo gratuito per contatore, potenza e percorso della linea</li><li>Un preventivo scritto per wallbox e installazione, senza sorprese</li><li>Se hai o vuoi il fotovoltaico, la versione giusta per usarlo</li></ul><p class="small" style="margin-top:12px">Interveniamo in Piemonte e Lombardia. Fuori zona ti richiamiamo comunque per capire se possiamo aiutarti.</p>
         <p class="access">Sei un’azienda, un condominio o un hotel? <a href="../">Scopri AMBRA per le colonnine condivise</a>.</p>
       </div>
       <form id="lead-form" novalidate>
@@ -600,12 +601,15 @@ html{scroll-padding-top:80px}
         <label>Versione di interesse
           <select id="f-fascia"><option value="">Non so, consigliatemi</option><option>Essenziale</option><option>Smart</option><option>Solare</option></select>
         </label>
-        <div class="form-opts">
-          <label class="check"><input id="f-noleggio" type="checkbox"><span>Mi interessa il noleggio a rata fissa per 36 mesi</span></label>
-          <label class="check"><input id="f-cer" type="checkbox"><span>Mi interessa entrare nella CER SolarCity</span></label>
-          <label class="check"><input id="f-bonus" type="checkbox"><span>Mi interessa il contributo a fondo perso, quando il bando riapre</span></label>
-        </div>
-        <label>Messaggio (facoltativo)<textarea id="f-msg" rows="3"></textarea></label>
+        <details class="more" id="f-more">
+          <summary>Vuoi dirci di più? (facoltativo)</summary>
+          <div class="form-opts">
+            <label class="check"><input id="f-noleggio" type="checkbox"><span>Mi interessa il noleggio a rata fissa per 36 mesi</span></label>
+            <label class="check"><input id="f-cer" type="checkbox"><span>Mi interessa entrare nella CER SolarCity</span></label>
+            <label class="check"><input id="f-bonus" type="checkbox"><span>Mi interessa il contributo a fondo perso, quando il bando riapre</span></label>
+          </div>
+          <label>Messaggio<textarea id="f-msg" rows="3"></textarea></label>
+        </details>
         <div class="hp" aria-hidden="true"><label>Lascia vuoto<input id="f-hp" tabindex="-1" autocomplete="off"></label></div>
         <label class="check"><input id="f-privacy" type="checkbox" required><span>Ho letto la <a href="https://www.baboo.eu/privacy/" target="_blank" rel="noopener">privacy policy</a> e accetto di essere ricontattato da BABOO ESCo.</span></label>
         <button class="btn btn-primary" type="submit" id="f-submit">Chiedi un sopralluogo</button>
