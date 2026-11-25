@@ -9,7 +9,8 @@ all'indirizzo **https://scopri-ambra.baboo.eu**. Stesso stampo di `BabooEsco/mon
 - `assets/` — logo AMBRA (chiaro/scuro), icona, favicon, sfondo impulso, mockup del telefono
   (`telefono-colonnine.svg`, incorporato anche in `index.html`), logo BABOO del piè di pagina.
 - `media/` — 25 video (MP4 1080p, ~21–30 s) con poster `.jpg` e sottotitoli `.vtt`: `cos-e-ambra`, `<pubblico>-apertura` e una scheda per ogni video. Riprese Higgsfield Seedance 2.5, voce Julian (ElevenLabs), grafiche AMBRA; ricetta in claude/ambra-video.md del progetto.
-- `CNAME` — da aggiungere al momento della pubblicazione (`scopri-ambra.baboo.eu`).
+- `wallbox/index.html` — pagina dedicata alla wallbox per la casa (destinazione delle campagne «Wallbox casa»), con calcolatore del risparmio e **configuratore**; `wallbox/listino.js` è l'unica fonte dei prezzi (IVA inclusa: 10% installazione, 22% noleggio), degli accessori e di cosa comprende l'installazione standard: per cambiare un prezzo si modifica solo quel file. I prezzi scritti nell'HTML (meta, hero, card) sono il fallback e vanno tenuti allineati a mano.
+- `CNAME` — dominio GitHub Pages (`scopri-ambra.baboo.eu`).
 
 ## Contenuti
 Nel blocco `<script>` di `index.html`:
@@ -28,7 +29,7 @@ Nomi suggeriti: `cos-e-ambra`, `aziende-apertura`, `aziende-tessere`, `aziende-r
 `aziende-costi`, `aziende-avvisi`, `aziende-fotovoltaico`, `condomini-…`, `hotel-…`.
 
 ## Form
-Invia a `https://www.baboo.eu/api/lead` con `origine:'ambra'` e oggetto `AMBRA · …`.
+Invia a `https://www.baboo.eu/api/lead` con `origine:'ambra'` e oggetto `AMBRA · …`. La pagina Casa manda `pubblico:'Casa'`, `azienda` = Comune, `versione`, `noleggio`, `cer`, `bonus` (relè 3.11.1); la configurazione scelta nel configuratore viaggia nel campo `messaggio` finché il relè non prevede campi dedicati.
 Da verificare prima della pubblicazione: che il servizio accetti richieste (CORS) dal dominio
 scopri-ambra.baboo.eu e il valore `origine:'ambra'`. Se non risponde, il form propone l'invio via email.
 

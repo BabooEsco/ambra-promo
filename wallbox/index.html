@@ -55,6 +55,39 @@ section[tabindex="-1"]:focus{outline:none}
 .hero .btn-secondary,.dark .btn-secondary{color:var(--m-sky);border-color:var(--m-sky)}
 .hero .btn-secondary:hover{background:rgba(143,176,210,.12)}
 
+/* Configuratore */
+.cfg{background:var(--m-surface);border:1px solid var(--m-line);border-radius:var(--m-radius-card);padding:24px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;margin-top:8px}
+.cfg fieldset{border:0;padding:0;margin:0 0 18px;min-width:0}
+.cfg legend{font:500 15px/1.3 var(--m-font);color:var(--m-ink);margin-bottom:8px;padding:0}
+.cfg legend small{display:block;font:400 13px var(--m-font);color:var(--m-ink-soft);margin-top:2px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;pointer-events:none}
+.opt>span{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 14px;border:1px solid var(--m-line);border-radius:8px;font-size:14px;color:var(--m-ink);background:#fff;cursor:pointer;transition:border-color .15s,background .15s}
+.opt>span i{font-style:normal;font-size:12px;color:var(--m-ink-soft)}.opt i span{display:inline}
+.opt input:checked+span{border-color:var(--m-action);background:var(--m-light);box-shadow:inset 0 0 0 1px var(--m-action)}
+.opt input:focus-visible+span{outline:2px solid var(--m-action);outline-offset:2px}
+.opt input:disabled+span{opacity:.45;cursor:not-allowed;text-decoration:line-through}
+.cfg .hint{font-size:13px;color:var(--m-ink-soft);margin-top:8px;min-height:1em}
+.cfg .hint.warn{color:var(--m-reactive)}
+.cfg-out{background:var(--m-light);border-radius:12px;padding:20px;align-self:start;position:sticky;top:88px}
+.cfg-out h3{font:500 18px/1.2 var(--m-font);color:var(--m-ink)}
+.cfg-out .tot{font:600 30px/1.1 var(--m-font);color:var(--m-ink);margin:10px 0 2px;font-variant-numeric:tabular-nums}
+.cfg-out .tot small{display:block;font:400 13px var(--m-font);color:var(--m-ink-soft);margin-top:4px}
+.cfg-out .lines{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:6px;font-size:14px;color:var(--m-ink)}
+.cfg-out .lines li{display:flex;justify-content:space-between;gap:12px}
+.cfg-out .lines li b{font-variant-numeric:tabular-nums;font-weight:600}
+.cfg-out h4{font:400 12px var(--m-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--m-ink-soft);margin:18px 0 8px}
+.cfg-out ul.chk-list{list-style:none;padding:0;margin:0;display:grid;gap:5px;font-size:13px;color:var(--m-ink-soft)}
+.cfg-out ul.chk-list li{padding-left:18px;position:relative}
+.cfg-out ul.chk-list li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:2px;background:var(--m-green)}
+.cfg-out ul.chk-list.later li::before{background:var(--m-amber)}
+.cfg-out .btn{width:100%;margin-top:18px}
+.cfg-out .fine{margin-top:10px}
+.cfg-stop{grid-column:1/-1;background:var(--m-light);border-radius:12px;padding:20px;font-size:15px;color:var(--m-ink)}
+.cfg-stop a{color:var(--m-action)}
+@media (max-width:900px){.cfg{grid-template-columns:1fr}.cfg-out{position:static}}
+
 /* Testata */
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--m-line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:68px}
@@ -396,6 +429,7 @@ html{scroll-padding-top:80px}
     <nav aria-label="Sezioni">
       <a href="#wallbox">La wallbox</a>
       <a href="#versioni">Versioni e prezzi</a>
+      <a href="#configura">Configura</a>
       <a href="#risparmio">Risparmio</a>
       <a href="#come-lavoriamo">Come lavoriamo</a>
       <a class="btn btn-primary" href="#contatti">Chiedi un sopralluogo</a>
@@ -408,6 +442,7 @@ html{scroll-padding-top:80px}
   <div class="menu" id="menu">
     <a href="#wallbox">La wallbox</a>
     <a href="#versioni">Versioni e prezzi</a>
+    <a href="#configura">Configura</a>
     <a href="#risparmio">Risparmio</a>
     <a href="#come-lavoriamo">Come lavoriamo</a>
     <a href="#contatti">Chiedi un sopralluogo</a>
@@ -484,8 +519,8 @@ html{scroll-padding-top:80px}
         <h4>Essenziale</h4>
         <p class="brand">Ricarica base + AMBRA</p>
         <p class="for">Per ricaricare a casa, di notte, al prezzo giusto.</p>
-        <p class="price"><small>Wallbox installata</small>da 1.045 € <em>IVA inclusa</em></p>
-        <p class="rent">oppure a noleggio: acconto 427 € e <b>da 24,40 €/mese</b>, IVA inclusa, per 36 mesi</p>
+        <p class="price"><small>Wallbox installata</small>da <span data-prezzo="Essenziale">1.045 €</span> <em>IVA inclusa</em></p>
+        <p class="rent">oppure a noleggio: acconto <span data-acconto>427 €</span> e <b>da <span data-rata="Essenziale">24,40 €</span>/mese</b>, IVA inclusa, per <span data-mesi>36</span> mesi</p>
         <ul><li>Display e lettore RFID, due tessere in dotazione</li><li>App AMBRA: ricariche, costi, report del mese e avvisi</li><li>7 kW monofase, 11 o 22 kW trifase, potenza fissata sul tuo contatore</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
         <a class="btn btn-secondary" href="#contatti" data-tier="Essenziale">Chiedi un sopralluogo</a>
       </article>
@@ -494,8 +529,8 @@ html{scroll-padding-top:80px}
         <h4>Smart</h4>
         <p class="brand">+ MONITOR sul contatore</p>
         <p class="for">Per programmare la ricarica e non far saltare il contatore.</p>
-        <p class="price"><small>Wallbox installata</small>da 1.265 € <em>IVA inclusa</em></p>
-        <p class="rent">oppure a noleggio: acconto 427 € e <b>da 31,70 €/mese</b>, IVA inclusa, per 36 mesi</p>
+        <p class="price"><small>Wallbox installata</small>da <span data-prezzo="Smart">1.265 €</span> <em>IVA inclusa</em></p>
+        <p class="rent">oppure a noleggio: acconto <span data-acconto>427 €</span> e <b>da <span data-rata="Smart">31,70 €</span>/mese</b>, IVA inclusa, per <span data-mesi>36</span> mesi</p>
         <ul><li>Tutto quello della Essenziale</li><li>MONITOR legge il contatore: casa e auto insieme, senza distacchi</li><li>Ricarica nelle fasce orarie più convenienti</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
         <a class="btn btn-primary" href="#contatti" data-tier="Smart">Chiedi un sopralluogo</a>
       </article>
@@ -503,13 +538,97 @@ html{scroll-padding-top:80px}
         <h4>Solare</h4>
         <p class="brand">+ MONITOR sul fotovoltaico</p>
         <p class="for">Per chi ha il fotovoltaico o lo farà con SOLERO.</p>
-        <p class="price"><small>Wallbox installata</small>da 1.485 € <em>IVA inclusa</em></p>
-        <p class="rent">oppure a noleggio: acconto 427 € e <b>da 40,30 €/mese</b>, IVA inclusa, per 36 mesi</p>
+        <p class="price"><small>Wallbox installata</small>da <span data-prezzo="Solare">1.485 €</span> <em>IVA inclusa</em></p>
+        <p class="rent">oppure a noleggio: acconto <span data-acconto>427 €</span> e <b>da <span data-rata="Solare">40,30 €</span>/mese</b>, IVA inclusa, per <span data-mesi>36</span> mesi</p>
         <ul><li>Tutto quello della Smart</li><li>Ricarica con il surplus del fotovoltaico</li><li>Più energia condivisa se sei nella CER SolarCity</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
         <a class="btn btn-secondary" href="#contatti" data-tier="Solare">Chiedi un sopralluogo</a>
       </article>
     </div>
-    <div class="tiers-note"><p><b>Cosa comprende «installata».</b> Sopralluogo, wallbox, linea dedicata fino a 10 metri dal quadro con posa a vista, protezione dedicata nel quadro, montaggio a parete, collegamento al Wi-Fi di casa e attivazione su AMBRA, due tessere RFID, dichiarazione di conformità e garanzia di 2 anni su wallbox e installazione. Se la tua casa chiede qualcosa in più (più cavo, posa sottotraccia, aumento di potenza, piedistallo a 299 €), lo vediamo al sopralluogo e te lo scriviamo nel preventivo prima di iniziare.</p><p>Prezzi IVA inclusa (10% sull’installazione, 22% sul noleggio). Il noleggio è soggetto ad approvazione dell’istituto finanziario e comprende wallbox, installazione, AMBRA, manutenzione e guasti, con la wallbox che resta tua a fine noleggio.</p></div>
+    <div class="tiers-note"><p><b>Cosa comprende «installata».</b> Sopralluogo, wallbox, linea dedicata fino a 10 metri dal quadro con posa a vista, protezione dedicata nel quadro, montaggio a parete, collegamento al Wi-Fi di casa e attivazione su AMBRA, due tessere RFID, dichiarazione di conformità e garanzia di 2 anni su wallbox e installazione. Se la tua casa chiede qualcosa in più (più cavo, posa sottotraccia, aumento di potenza, piedistallo a <span data-acc-prezzo="piedistallo">299 €</span>), lo vediamo al sopralluogo e te lo scriviamo nel preventivo prima di iniziare.</p><p>Prezzi IVA inclusa (10% sull’installazione, 22% sul noleggio). Il noleggio è soggetto ad approvazione dell’istituto finanziario e comprende wallbox, installazione, AMBRA, manutenzione e guasti, con la wallbox che resta tua a fine noleggio.</p></div>
+  </div>
+</section>
+
+<section class="block" id="configura">
+  <div class="wrap">
+    <div class="head center"><div><p class="eyebrow">Configuratore</p><h2>Componi la tua wallbox</h2></div><p>Sei risposte e vedi il prezzo: tutto IVA inclusa, con scritto cosa è compreso e cosa guardiamo al sopralluogo.</p></div>
+    <form class="cfg" id="cfg" novalidate>
+      <div class="cfg-in">
+        <fieldset>
+          <legend>Dove va la wallbox?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="dove" value="casa" checked><span>Casa singola o villetta</span></label>
+            <label class="opt"><input type="radio" name="dove" value="condominio"><span>Posto auto in condominio</span></label>
+          </div>
+        </fieldset>
+        <div id="cfg-main">
+        <fieldset>
+          <legend>Che potenza ha il tuo contatore? <small>La trovi in bolletta, voce «potenza impegnata».</small></legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="potenza" value="3"><span>3 kW</span></label>
+            <label class="opt"><input type="radio" name="potenza" value="4.5-6" checked><span>4,5 o 6 kW</span></label>
+            <label class="opt"><input type="radio" name="potenza" value="oltre6"><span>Più di 6 kW</span></label>
+            <label class="opt"><input type="radio" name="potenza" value="trifase"><span>Trifase</span></label>
+            <label class="opt"><input type="radio" name="potenza" value="nonso"><span>Non lo so</span></label>
+          </div>
+          <p class="hint" id="h-potenza"></p>
+        </fieldset>
+        <fieldset>
+          <legend>Quale versione?</legend>
+          <div class="opts" id="cfg-versioni">
+            <label class="opt"><input type="radio" name="versione" value="Essenziale"><span>Essenziale <i data-prezzo="Essenziale">1.045 €</i></span></label>
+            <label class="opt"><input type="radio" name="versione" value="Smart" checked><span>Smart <i data-prezzo="Smart">1.265 €</i></span></label>
+            <label class="opt"><input type="radio" name="versione" value="Solare"><span>Solare <i data-prezzo="Solare">1.485 €</i></span></label>
+          </div>
+          <p class="hint" id="h-versione"></p>
+        </fieldset>
+        <fieldset>
+          <legend>Come la montiamo?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="montaggio" value="parete" checked><span>A parete <i>compreso</i></span></label>
+            <label class="opt"><input type="radio" name="montaggio" value="piedistallo"><span>Su piedistallo <i>+ <span data-acc-prezzo="piedistallo">299 €</span></i></span></label>
+          </div>
+          <p class="hint" id="h-montaggio"></p>
+        </fieldset>
+        <fieldset>
+          <legend>Il Wi-Fi di casa arriva nel box o al posto auto?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="wifi" value="si" checked><span>Sì <i>compreso</i></span></label>
+            <label class="opt"><input type="radio" name="wifi" value="no"><span>No <i>modulo 4G + <span data-acc-prezzo="modulo4g">59 €</span></i></span></label>
+            <label class="opt"><input type="radio" name="wifi" value="nonso"><span>Non lo so</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Quanto dista il quadro elettrico dal punto di ricarica?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="distanza" value="entro" checked><span>Entro 10 metri <i>compreso</i></span></label>
+            <label class="opt"><input type="radio" name="distanza" value="oltre"><span>Più di 10 metri</span></label>
+            <label class="opt"><input type="radio" name="distanza" value="nonso"><span>Non lo so</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Come preferisci pagarla?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="formula" value="acquisto" checked><span>Acquisto</span></label>
+            <label class="opt"><input type="radio" name="formula" value="noleggio"><span>Noleggio <i><span data-mesi>36</span> mesi</i></span></label>
+          </div>
+        </fieldset>
+        </div>
+      </div>
+      <aside class="cfg-out" id="cfg-out" aria-live="polite">
+        <h3 id="o-title">Wallbox Smart, installata</h3>
+        <p class="tot" id="o-tot">1.265 €<small id="o-tot-sub">IVA inclusa, installazione standard compresa</small></p>
+        <ul class="lines" id="o-lines"></ul>
+        <h4>Compreso nel prezzo</h4>
+        <ul class="chk-list" id="o-incl"></ul>
+        <h4>Da valutare al sopralluogo</h4>
+        <ul class="chk-list later" id="o-later"></ul>
+        <a class="btn btn-primary" href="#contatti" id="o-cta">Prenota il sopralluogo</a>
+        <p class="fine">La tua configurazione arriva con la richiesta. Il sopralluogo è gratuito e senza impegno. Il preventivo definitivo arriva scritto dopo il sopralluogo: paghi il 50% alla conferma e il saldo prima dell’installazione; con il noleggio, l’acconto alla firma e nient’altro prima dell’installazione.</p>
+      </aside>
+      <div class="cfg-stop" id="cfg-stop" hidden>
+        <b>Posto auto in condominio: facciamo un percorso dedicato.</b> Serve la comunicazione all’amministratore e spesso la linea parte dal contatore del garage, quindi il prezzo si definisce al sopralluogo. <a href="../#condomini">Scopri AMBRA per i condomìni</a> oppure <a href="#contatti" data-condominio>chiedi direttamente il sopralluogo</a>: ci occupiamo noi di tutto.
+      </div>
+    </form>
   </div>
 </section>
 
@@ -640,6 +759,7 @@ html{scroll-padding-top:80px}
 <dialog id="vdlg" aria-label="Video"><button type="button" class="vclose" id="v-close" aria-label="Chiudi">×</button><video id="v-el" controls playsinline preload="none" poster="../media/casa-apertura.jpg"></video></dialog>
 
 <div class="stick" id="stick"><a class="btn btn-primary" href="#contatti">Chiedi un sopralluogo</a></div>
+<script src="listino.js"></script>
 <script>
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LEAD_TO = 'renato_clementi@baboo.eu';
@@ -672,10 +792,75 @@ new IntersectionObserver(([e])=>{formIn=e.isIntersecting;upd()}).observe($('cont
   function run(){ const b=+$('t-bat').value; $('t-bat-o').textContent=b+' kWh'; const e=b*0.7/0.9, mx=e/2.3;
     $('t-rows').innerHTML=P.map(([l,s,p])=>{const h=e/p, hh=Math.floor(h), mm=Math.round((h-hh)*60/5)*5; return `<div class="tt-row"><span>${l}<br><small>${s}</small></span><i style="width:${Math.max(3,h/mx*100)}%"></i><b>${hh} h${mm?' '+String(mm).padStart(2,'0'):''}</b></div>`}).join('');}
   $('t-bat').addEventListener('input',run); run(); })();
+/* Prezzi dal listino (wallbox/listino.js) */
+const L=window.LISTINO||{};
+const eurI=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' €', eurD=n=>n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+if(L.versioni){
+  document.querySelectorAll('[data-prezzo]').forEach(el=>{const v=L.versioni[el.dataset.prezzo]; if(v) el.textContent=eurI(v.prezzo)});
+  document.querySelectorAll('[data-rata]').forEach(el=>{const v=L.versioni[el.dataset.rata]; if(v) el.textContent=eurD(v.rata)});
+  document.querySelectorAll('[data-acconto]').forEach(el=>el.textContent=eurI(L.noleggio.acconto));
+  document.querySelectorAll('[data-mesi]').forEach(el=>el.textContent=L.noleggio.mesi);
+  document.querySelectorAll('[data-acc-prezzo]').forEach(el=>{const a=L.accessori[el.dataset.accPrezzo]; if(a) el.textContent=eurI(a.prezzo)});
+}
+/* Configuratore */
+window.CFG_STATE=null;
+(function(){
+  if(!L.versioni) return;
+  const f=$('cfg'), val=n=>(f.querySelector(`input[name="${n}"]:checked`)||{}).value;
+  const ess=f.querySelector('input[name="versione"][value="Essenziale"]');
+  const LBL={potenza:{'3':'3 kW','4.5-6':'4,5-6 kW','oltre6':'più di 6 kW','trifase':'trifase','nonso':'non sa'},montaggio:{parete:'a parete',piedistallo:'su piedistallo'},sn:{si:'sì',no:'no',nonso:'non sa'},distanza:{entro:'entro 10 m',oltre:'oltre 10 m',nonso:'non sa'}};
+  function run(){
+    const dove=val('dove'); $('cfg-stop').hidden=dove!=='condominio'; $('cfg-main').hidden=dove==='condominio'; $('cfg-out').hidden=dove==='condominio';
+    if(dove==='condominio'){window.CFG_STATE={dove};return;}
+    const pot=val('potenza');
+    // con 3 kW serve la Smart: l'Essenziale non modula sotto il contatore
+    ess.disabled=pot==='3'; if(ess.disabled&&val('versione')==='Essenziale') f.querySelector('input[name="versione"][value="Smart"]').checked=true;
+    $('h-potenza').textContent={ '3':'Con 3 kW la wallbox deve restare sotto il contatore: serve la versione Smart, che modula la potenza. Nessun aumento di potenza da chiedere.',
+      '4.5-6':'Bene: ricarichi a 7 kW senza toccare il contatore; la Smart evita comunque i distacchi quando forno e lavatrice sono accesi.',
+      'oltre6':'Ottimo: la wallbox lavora a 7 kW in monofase senza limiti.',
+      'trifase':'Con la trifase possiamo installare la wallbox da 11 o 22 kW: lo decidiamo al sopralluogo in base all’auto.',
+      'nonso':'Nessun problema: la leggiamo al sopralluogo. Il prezzo non cambia.' }[pot]||'';
+    $('h-potenza').className='hint'+(pot==='3'?' warn':'');
+    const ver=val('versione'), V=L.versioni[ver];
+    $('h-versione').textContent=ver==='Solare'?'Per chi ha il fotovoltaico o lo farà con SOLERO: ricarica con il surplus del tetto.':ver==='Smart'?'MONITOR legge il contatore: casa e auto insieme, senza distacchi, e ricarica nelle ore che costano meno.':'Ricarica base con app AMBRA, a potenza fissa.';
+    const mont=val('montaggio'), wifi=val('wifi'), dist=val('distanza'), formula=val('formula');
+    $('h-montaggio').textContent=mont==='piedistallo'?L.accessori.piedistallo.nome+': '+L.accessori.piedistallo.nota+'.':'';
+    const lines=[], incl=[...L.standard.compreso], later=[];
+    let unaTantum=0;
+    if(mont==='piedistallo'){lines.push([L.accessori.piedistallo.nome,L.accessori.piedistallo.prezzo]); unaTantum+=L.accessori.piedistallo.prezzo;}
+    if(wifi==='no'){lines.push([L.accessori.modulo4g.nome,L.accessori.modulo4g.prezzo]); unaTantum+=L.accessori.modulo4g.prezzo;}
+    if(wifi==='nonso') later.push('Segnale Wi-Fi nel box: se non arriva, modulo 4G con SIM a '+eurI(L.accessori.modulo4g.prezzo));
+    if(dist==='oltre') later.push('Metri di cavo oltre i '+L.standard.metriCavo+': si quotano a metro nel preventivo');
+    if(dist==='nonso') later.push('Distanza dal quadro: fino a '+L.standard.metriCavo+' metri è compresa, oltre si quota a metro');
+    if(pot==='trifase') later.push('Potenza della wallbox (11 o 22 kW) in base alla tua auto');
+    if(pot==='nonso') later.push('Potenza del contatore: con 3 kW serve la Smart');
+    later.push('Spazio nel quadro, tipo di parete e percorso della linea');
+    let tot, sub, title;
+    if(formula==='noleggio'){
+      title=`Wallbox ${ver} a noleggio`; tot=eurD(V.rata)+'/mese';
+      sub=`per ${L.noleggio.mesi} mesi, IVA inclusa · acconto ${eurI(L.noleggio.acconto)}`+(unaTantum?` · accessori ${eurI(unaTantum)} una tantum`:'');
+      lines.unshift(['Acconto alla firma',L.noleggio.acconto]);
+    } else {
+      title=`Wallbox ${ver}, installata`; tot=eurI(V.prezzo+unaTantum); sub='IVA inclusa, installazione standard compresa';
+      lines.unshift([`Wallbox ${ver} installata`,V.prezzo]);
+    }
+    $('o-title').textContent=title; $('o-tot').firstChild.textContent=tot; $('o-tot-sub').textContent=sub;
+    $('o-lines').innerHTML=lines.map(([l,v])=>`<li><span>${l}</span><b>${eurI(v)}</b></li>`).join('');
+    $('o-incl').innerHTML=incl.map(t=>`<li>${t}</li>`).join(''); $('o-later').innerHTML=later.map(t=>`<li>${t}</li>`).join('');
+    window.CFG_STATE={dove,potenza:pot,versione:ver,montaggio:mont,wifi,distanza:dist,formula,totale:formula==='noleggio'?null:V.prezzo+unaTantum,rata:formula==='noleggio'?V.rata:null,
+      testo:`Configurazione dal sito: ${title} · ${tot}${sub?' ('+sub+')':''} · contatore: ${LBL.potenza[pot]} · montaggio: ${LBL.montaggio[mont]} · Wi-Fi nel box: ${LBL.sn[wifi]} · distanza dal quadro: ${LBL.distanza[dist]}`+(later.length?` · da valutare: ${later.join('; ')}`:'')};
+  }
+  f.addEventListener('change',run); run();
+  // il pulsante porta la configurazione nel form
+  $('o-cta').addEventListener('click',()=>{const c=window.CFG_STATE; if(!c||!c.versione) return;
+    $('f-fascia').value=c.versione; $('f-noleggio').checked=c.formula==='noleggio'; if(c.formula==='noleggio') $('f-more').open=true;
+    $('f-msg').value=c.testo; });
+  f.querySelector('[data-condominio]').addEventListener('click',()=>{$('f-msg').value='Posto auto in condominio: richiesta dal configuratore della pagina Casa.'; $('f-more').open=true;});
+})();
 /* Calcolatore del risparmio */
 (function(){
-  const TIERS={Essenziale:{p:1045,r:24.40},Smart:{p:1265,r:31.70},Solare:{p:1485,r:40.30}}, EV=17, ACC=427; // prezzi IVA inclusa
-  const eu=n=>Math.round(n).toLocaleString('it-IT')+' €', eu2=n=>n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €', g=id=>document.getElementById(id), num=id=>parseFloat(g(id).value)||0;
+  const TIERS=Object.fromEntries(Object.entries(L.versioni||{Essenziale:{prezzo:1045,rata:24.40},Smart:{prezzo:1265,rata:31.70},Solare:{prezzo:1485,rata:40.30}}).map(([k,v])=>[k,{p:v.prezzo,r:v.rata}])), EV=17, ACC=(L.noleggio||{}).acconto||427; // prezzi IVA inclusa dal listino
+  const eu=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' €', eu2=n=>n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €', g=id=>document.getElementById(id), num=id=>parseFloat(g(id).value)||0;
   g('k-fuel').addEventListener('change',()=>{const b=g('k-fuel').value==='b'; g('k-cons').value=b?'6.5':'5.2'; g('k-pf').value=b?'1.98':'2.22'; run();});
   ['k-km','k-cons','k-pf','k-pe','k-pp','k-tier','k-fv'].forEach(id=>g(id).addEventListener('input',run));
   function run(){
@@ -722,6 +907,7 @@ $('lead-form').addEventListener('submit',async e=>{
   const payload={nome:v('f-nome'),telefono:v('f-tel'),email:v('f-email'),azienda:v('f-az')||undefined,zona:v('f-zona'),
     messaggio:[extra,v('f-msg')].filter(Boolean).join('\n\n'),pubblico:'Casa',oggetto:`AMBRA · ${CTA} · Casa · landing wallbox`,origine:'ambra',
     versione,noleggio,cer,bonus,privacy:true,privacy_v:PRIVACY_V,pagina:location.pathname+(location.hash||''),
+    /* TODO relè 3.11.2: inviare anche window.CFG_STATE (potenza, montaggio, wifi, distanza, formula) come campi; oggi la configurazione viaggia nel messaggio */
     pagina_da:sget('a_landing')||'',referrer:sget('a_ref')||'',utm:utm||undefined,hp:v('f-hp')};
   const mailBody=[`Nome: ${payload.nome}`,`Comune: ${payload.azienda||'-'}`,`Telefono: ${payload.telefono}`,`Email: ${payload.email}`,`Zona: ${payload.zona}`,'',payload.messaggio].join('\n');
   $('fb-link').href=`mailto:${LEAD_TO}?subject=${encodeURIComponent(payload.oggetto)}&body=${encodeURIComponent(mailBody)}`;
