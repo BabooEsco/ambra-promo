@@ -92,9 +92,9 @@ section[tabindex="-1"]:focus{outline:none}
 /* Testata */
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--m-line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:68px}
-.top .logo{display:flex;align-items:center;gap:12px;text-decoration:none}.top .logo img{height:40px;width:auto}.top .logo-by{font:400 12px/1.3 var(--m-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--m-ink-soft);border-left:1px solid var(--m-line);padding-left:12px}@media (max-width:600px){.top .logo-by{display:none}}
+.top .logo{display:flex;align-items:center;gap:12px;text-decoration:none}.top .logo img{height:40px;width:auto}.top .logo-by{font:400 12px/1.3 var(--m-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--m-ink-soft);border-left:1px solid var(--m-line);padding-left:12px;white-space:nowrap}@media (max-width:1100px){.top .logo-by{display:none}}
 .top nav{display:flex;gap:4px;align-items:center}
-.top nav a{color:var(--m-ink-soft);text-decoration:none;font-size:14px;padding:10px 12px;border-radius:var(--m-radius-btn)}
+.top nav a{color:var(--m-ink-soft);text-decoration:none;font-size:14px;padding:10px 12px;border-radius:var(--m-radius-btn);white-space:nowrap}
 .top nav a:hover{color:var(--m-ink);background:var(--m-light)}
 .top nav a.ext{color:var(--m-action)}
 .top .btn{min-height:40px;padding:0 18px;font-size:13px}
@@ -429,11 +429,9 @@ html{scroll-padding-top:80px}
   <div class="wrap">
     <a class="logo" href="../"><img src="../assets/ambra-logo-fondo-chiaro.svg" alt="AMBRA · BABOO Energy" width="146" height="40"><span class="logo-by">Un servizio di BABOO ESCo</span></a>
     <nav aria-label="Sezioni">
-      <a href="#wallbox">La wallbox</a>
-      <a href="#versioni">Versioni e prezzi</a>
+      <a href="#wallbox">Wallbox</a>
+      <a href="#versioni">Prezzi</a>
       <a href="#configura">Configura</a>
-      <a href="#risparmio">Risparmio</a>
-      <a href="#come-lavoriamo">Come lavoriamo</a>
       <a href="../" class="ext">Scopri AMBRA</a>
       <a class="btn btn-primary" href="#contatti">Chiedi un sopralluogo</a>
       <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Apri il menu">
