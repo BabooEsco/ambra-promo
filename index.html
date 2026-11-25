@@ -62,6 +62,7 @@ section[tabindex="-1"]:focus{outline:none}
 .top nav{display:flex;gap:4px;align-items:center}
 .top nav a{color:var(--m-ink-soft);text-decoration:none;font-size:14px;padding:10px 12px;border-radius:var(--m-radius-btn)}
 .top nav a:hover{color:var(--m-ink);background:var(--m-light)}
+.top nav a.ext{color:var(--m-action)}
 .top .btn{min-height:40px;padding:0 18px;font-size:13px}
 .menu-btn{display:none;width:44px;height:44px;margin-left:4px;border:1px solid var(--m-line);border-radius:var(--m-radius-btn);background:#fff;color:var(--m-ink);cursor:pointer;align-items:center;justify-content:center}
 .menu-btn:hover{background:var(--m-light)}
@@ -312,6 +313,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
       <a href="#cosa-gestisce">Cosa gestisce</a>
       <a href="#come-funziona">Come funziona</a>
       <a href="#per-chi">Per chi</a>
+      <a href="wallbox/" class="ext">Wallbox casa</a>
       <a class="btn btn-secondary" href="https://ambra.baboo.eu">Accedi</a>
       <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Apri il menu">
         <svg class="mb" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
@@ -323,6 +325,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
     <a href="#cosa-gestisce">Cosa gestisce</a>
     <a href="#come-funziona">Come funziona</a>
     <a href="#per-chi">Per chi</a>
+    <a href="wallbox/">Wallbox per la casa</a>
     <a href="#contatti">Contatti</a>
   </div>
 </header>
@@ -428,7 +431,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
           <p class="price"><small>Wallbox installata</small>da <span data-prezzo="Essenziale">1.045 €</span> <em>IVA inclusa</em></p>
           <p class="rent">oppure a noleggio: acconto <span data-acconto>427 €</span> e <b>da <span data-rata="Essenziale" data-durata="24">33,80 €</span>/mese</b> per 24 mesi, o <span data-rata="Essenziale" data-durata="12">64,40 €</span>/mese per 12, IVA inclusa</p>
           <ul><li>Display e lettore di tessere RFID</li><li>App AMBRA: ricariche, costi, report del mese e avvisi</li><li>7 kW monofase, 11 o 22 kW trifase, potenza fissata sul tuo contatore</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
-          <button class="btn btn-secondary" type="button" data-tier="Essenziale">Chiedi un sopralluogo</button>
+          <a class="btn btn-secondary" href="wallbox/?v=Essenziale#configura">Componi e vedi il prezzo</a>
         </article>
         <article class="tier hl">
           <span class="badge">La più scelta</span>
@@ -438,7 +441,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
           <p class="price"><small>Wallbox installata</small>da <span data-prezzo="Smart">1.265 €</span> <em>IVA inclusa</em></p>
           <p class="rent">oppure a noleggio: acconto <span data-acconto>427 €</span> e <b>da <span data-rata="Smart" data-durata="24">45,10 €</span>/mese</b> per 24 mesi, o <span data-rata="Smart" data-durata="12">85,80 €</span>/mese per 12, IVA inclusa</p>
           <ul><li>Tutto quello della Essenziale</li><li>MONITOR legge il contatore: casa e auto insieme, senza distacchi</li><li>Ricarica nelle fasce orarie più convenienti</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
-          <button class="btn btn-primary" type="button" data-tier="Smart">Chiedi un sopralluogo</button>
+          <a class="btn btn-primary" href="wallbox/?v=Smart#configura">Componi e vedi il prezzo</a>
         </article>
         <article class="tier">
           <h4>Solare</h4>
@@ -447,7 +450,7 @@ dialog::backdrop{background:rgba(15,21,28,.55);backdrop-filter:blur(3px)}
           <p class="price"><small>Wallbox installata</small>da <span data-prezzo="Solare">1.485 €</span> <em>IVA inclusa</em></p>
           <p class="rent">oppure a noleggio: acconto <span data-acconto>427 €</span> e <b>da <span data-rata="Solare" data-durata="24">56,30 €</span>/mese</b> per 24 mesi, o <span data-rata="Solare" data-durata="12">107,30 €</span>/mese per 12, IVA inclusa</p>
           <ul><li>Tutto quello della Smart</li><li>Ricarica con il surplus del fotovoltaico</li><li>Più energia condivisa se sei nella CER SolarCity</li><li>Sopralluogo, progetto, posa e dichiarazione di conformità</li></ul>
-          <button class="btn btn-secondary" type="button" data-tier="Solare">Chiedi un sopralluogo</button>
+          <a class="btn btn-secondary" href="wallbox/?v=Solare#configura">Componi e vedi il prezzo</a>
         </article>
       </div>
       <p class="tiers-note">Prezzi IVA inclusa (10% sull’installazione, 22% sul noleggio) per installazioni standard: linea fino a 10 metri dal quadro, protezione nel quadro, montaggio a parete, attivazione su AMBRA, due tessere e dichiarazione di conformità. Il noleggio a 12 o 24 mesi è soggetto ad approvazione. Cavo oltre i 10 metri, opere murarie e aumento di potenza si quotano dopo il sopralluogo. <a href="wallbox/#configura">Componi la tua wallbox e vedi il prezzo →</a></p>

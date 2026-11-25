@@ -852,6 +852,8 @@ window.CFG_STATE=null;
     window.CFG_STATE={dove,potenza:pot,versione:ver,montaggio:mont,wifi,distanza:dist,formula,mesi:mesi||null,totale:mesi?null:V.prezzo+unaTantum,rata,
       testo:`Configurazione dal sito: ${title} · ${tot}${sub?' ('+sub+')':''} · contatore: ${LBL.potenza[pot]} · montaggio: ${LBL.montaggio[mont]} · Wi-Fi nel box: ${LBL.sn[wifi]} · distanza dal quadro: ${LBL.distanza[dist]}`+(later.length?` · da valutare: ${later.join('; ')}`:'')};
   }
+  // versione preselezionata dall'URL (es. ?v=Smart dalla vetrina)
+  const qv=new URLSearchParams(location.search).get('v'); if(qv&&L.versioni[qv]){const r=f.querySelector(`input[name="versione"][value="${qv}"]`); if(r) r.checked=true;}
   f.addEventListener('change',run); run();
   // il pulsante porta la configurazione nel form
   $('o-cta').addEventListener('click',()=>{const c=window.CFG_STATE; if(!c||!c.versione) return;
